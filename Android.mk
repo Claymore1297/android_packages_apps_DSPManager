@@ -18,6 +18,8 @@ LOCAL_RESOURCE_DIR += $(appcompat_dir)
 LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 
+LOCAL_PRIVATE_PLATFORM_APIS := true
+
 LOCAL_PACKAGE_NAME := DSPManager
 
 LOCAL_OVERRIDES_PACKAGES := MusicFX
