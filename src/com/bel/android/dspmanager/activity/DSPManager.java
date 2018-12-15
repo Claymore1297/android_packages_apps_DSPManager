@@ -46,7 +46,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.util.Log;
-import android.media.audiofx.StereoWide;
 
 import com.bel.android.dspmanager.R;
 import com.bel.android.dspmanager.modules.boefflasoundcontrol.BoefflaSoundControl;
@@ -89,7 +88,6 @@ public final class DSPManager extends Activity {
     //==================================
     private static String[] mEntries;
     private static List<HashMap<String, String>> mTitles;
-    private static boolean mHasStereoWide = true;
 
     //==================================
     // Drawer
@@ -144,15 +142,6 @@ public final class DSPManager extends Activity {
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
-        }
-
-        // try to create the effect - if not supported
-        // it will throw an exception
-        try {
-            StereoWide stereoWide = new StereoWide(0, 0);
-            stereoWide.release();
-        } catch(java.lang.IllegalArgumentException e) {
-            mHasStereoWide = false;
         }
 
         Intent serviceIntent = new Intent(this, HeadsetService.class);
@@ -666,7 +655,6 @@ public final class DSPManager extends Activity {
                 final DSPScreen dspFragment = new DSPScreen();
                 Bundle b = new Bundle();
                 b.putString("config", mEntries[fragmentId]);
-                b.putBoolean("stereoWide", mHasStereoWide);
                 dspFragment.setArguments(b);
                 return dspFragment;
             }
@@ -716,7 +704,6 @@ public final class DSPManager extends Activity {
                 final DSPScreen dspFragment = new DSPScreen();
                 Bundle b = new Bundle();
                 b.putString("config", entries[position]);
-                b.putBoolean("stereoWide", mHasStereoWide);
                 dspFragment.setArguments(b);
                 return dspFragment;
             }
